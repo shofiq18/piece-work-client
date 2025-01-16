@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.carousel-container {
+    max-height: 700px; /* Default height for desktops */
+    /* overflow: hidden; */
+}
+  
+.carousel-container .carousel .slide img {
+    height: 700px; /* Default height for images */
+    /* object-fit: cover; */
+    width: 100%; /* Ensures images span full width */
+}
+  
+/* Laptop: 1025px to 1366px */
+@media (max-width: 1366px) and (min-width: 1025px) {
+    .carousel-container {
+        max-height: 500px; /* Height for laptops */
+    }
+
+    .carousel-container .carousel .slide img {
+        height: 500px; /* Adjust image height for laptops */
+    }
+}
+  
+/* Tablet: 768px to 1024px */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .carousel-container {
+        max-height: 400px; /* Height for tablets */
+    }
+  
+    .carousel-container .carousel .slide img {
+        height: 400px; /* Adjust image height for tablets */
+    }
+}
+  
+/* Mobile: less than 768px */
+@media (max-width: 768px) {
+    .carousel-container {
+        max-height: 300px; /* Height for mobile devices */
+    }
+  
+    .carousel-container .carousel .slide img {
+        height: 300px; /* Adjust image height for mobile devices */
+    }
+}
