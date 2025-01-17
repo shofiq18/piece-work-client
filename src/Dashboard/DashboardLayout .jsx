@@ -22,6 +22,7 @@ const DashboardLayout = () => {
       { name: "Add Tasks", path: "/dashboard/add-tasks" },
       { name: "My Tasks", path: "/dashboard/my-tasks" },
       { name: "Purchase Coins", path: "/dashboard/purchase-coins" },
+      { name: "Payment History", path: "/dashboard/payment-history" },
     ],
     Admin: [
       { name: "Home", path: "/dashboard/admin-home" },

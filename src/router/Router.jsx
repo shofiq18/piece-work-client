@@ -17,7 +17,7 @@ import Withdrawals from "../Dashboard/worker/Withdrawals";
 
 // Buyer page 
 import BuyerDashboardHome from "../Dashboard/Buyer/BuyerDashboardHome";
-import AddTasks from "../Dashboard/Buyer/AddTasks";
+import AddTasks from "../Dashboard/Buyer/AddTask";
 import MyTasks from "../Dashboard/Buyer/MyTasks";
 import PurchaseCoins from "../Dashboard/Buyer/PurchaseCoins";
 
@@ -25,6 +25,7 @@ import PurchaseCoins from "../Dashboard/Buyer/PurchaseCoins";
 import AdminDashboardHome from "../Dashboard/Admin/AdminDashboardHome";
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
 import ManageTasks from "../Dashboard/Admin/ManageTasks";
+import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/purchase-coins",
         element: <PurchaseCoins></PurchaseCoins>, // Purchase Coins Page for Buyer
+      },
+      {
+        path: "/dashboard/payment-history",
+        element: <PaymentHistory></PaymentHistory>, // Purchase Coins Page for Buyer
       },
 
       // Admin Routes
