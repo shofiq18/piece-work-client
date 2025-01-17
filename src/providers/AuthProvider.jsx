@@ -1,13 +1,14 @@
+
 import { createContext, useEffect, useState } from "react";
-import { 
-  createUserWithEmailAndPassword, 
-  getAuth, 
-  onAuthStateChanged, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  signInWithPopup, 
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  signInWithPopup,
   updateProfile,
-  GoogleAuthProvider 
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
@@ -43,9 +44,28 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, updatedData);
   };
 
+  // Fetch user details from backend
+  const fetchUserDetails = async (email) => {
+    try {
+      const response = await fetch(`http://localhost:5000/users/${email}`);
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData); // Set user with backend data
+      } else {
+        console.error("Failed to fetch user details");
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        fetchUserDetails(currentUser.email); // Fetch user data from backend
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
 
@@ -54,7 +74,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
-    setUser, // Added this so you can use it in Login
+    setUser,
     loading,
     createUser,
     signIn,
