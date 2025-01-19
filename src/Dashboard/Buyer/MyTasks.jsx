@@ -1,6 +1,18 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+
+
 const MyTasks = () => {
-    return <h1 className="text-2xl font-bold">My Tasks Page</h1>;
-  };
+
   
-  export default MyTasks;
+  
+
+  return (
+    <div>
+      <h1>my task</h1>
+    </div>
+  );
+};
+
+export default MyTasks;
   

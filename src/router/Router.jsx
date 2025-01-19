@@ -26,6 +26,7 @@ import AdminDashboardHome from "../Dashboard/Admin/AdminDashboardHome";
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
 import ManageTasks from "../Dashboard/Admin/ManageTasks";
 import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
+import TaskDetails from "../Dashboard/Worker/TaskDetails";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/tasks",
         element: <TaskList></TaskList>, // Task List for Worker
+      },
+      {
+        path: "/dashboard/tasks/:taskId",
+        element: <TaskDetails></TaskDetails>, // Task List for Worker
       },
       {
         path: "/dashboard/submissions",

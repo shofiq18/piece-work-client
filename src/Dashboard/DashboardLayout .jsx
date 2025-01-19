@@ -1,4 +1,3 @@
-
 import { Link, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
@@ -38,8 +37,8 @@ const DashboardLayout = () => {
           <h1 className="text-2xl text-green-400 font-bold">Piece Work</h1>
         </Link>
         <div className="flex items-center space-x-6">
-          <span className="font-semibold">Coins: {user.coins}</span>
-          <span className="font-semibold">Role: {user.role}</span>
+          {user.role !== "Admin" && <span className="font-semibold">Coins: {user.coins}</span>}
+          <span className="font-semibold"> {user.role}</span>
           <img
             src={user.photo}
             alt={user.name}

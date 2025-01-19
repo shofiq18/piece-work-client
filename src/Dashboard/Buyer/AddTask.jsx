@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -37,7 +38,6 @@ const AddTask = () => {
         `https://api.imgbb.com/1/upload?key=${image_hosting_key}`,
         formData
       );
-      console.log(response); 
       setTask((prevTask) => ({
         ...prevTask,
         task_image_url: response.data.data.display_url,
@@ -49,7 +49,7 @@ const AddTask = () => {
         showConfirmButton: false,
       });
     } catch (error) {
-      console.error("Error uploading image:", error.response || error); 
+      console.error("Error uploading image:", error.response || error);
       Swal.fire({
         icon: "error",
         title: "Image upload failed",
@@ -60,10 +60,18 @@ const AddTask = () => {
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-    const { task_title, required_workers, payable_amount, completion_date, task_detail } = task;
-  
-    const totalPayableAmount = parseInt(required_workers) * parseInt(payable_amount);
-  
+    const {
+      task_title,
+      required_workers,
+      payable_amount,
+      completion_date,
+      task_detail,
+    } = task;
+
+    // Convert required_workers and payable_amount to numbers
+    const totalPayableAmount =
+      parseInt(required_workers, 10) * parseInt(payable_amount, 10);
+
     // Check if the user has enough coins
     if (user.coins < totalPayableAmount) {
       Swal.fire({
@@ -71,53 +79,50 @@ const AddTask = () => {
         title: "Not enough coins!",
         text: "Please purchase more coins to add this task.",
       }).then(() => {
-        navigate("/dashboard/purchase-coins"); 
+        navigate("/dashboard/purchase-coins");
       });
       return;
     }
-  
-    // Optimistically update the user state by deducting coins immediately
+
+    const taskToSend = {
+      ...task,
+      required_workers: parseInt(required_workers, 10), // Ensure number type
+      payable_amount: parseInt(payable_amount, 10), // Ensure number type
+      email: user.email, // Include user email
+    };
+
+    // Optimistically update the user state
     const updatedUser = { ...user, coins: user.coins - totalPayableAmount };
-    setUser(updatedUser); // Update coins in frontend immediately
-  
+    setUser(updatedUser);
+
     try {
-      // Add task to the database
-      const taskResponse = await axios.post("http://localhost:5000/tasks", {
-        ...task,
-        email: user.email,
-      });
-  
+      const taskResponse = await axios.post("http://localhost:5000/tasks", taskToSend);
       if (taskResponse.status === 201) {
-        // Deduct coins from the user's account after task creation
-        const userResponse = await axios.patch("http://localhost:5000/users/deduct-coins", {
-          email: user.email,
-          amount: totalPayableAmount,
-        });
-  
-        if (userResponse.status === 200) {
-          // Fetch updated user data after deducting coins
-          const updatedUser = await axios.get(`http://localhost:5000/users/${user.email}`);
-  
-          if (updatedUser.data.coins <= 0) {
-            navigate("/dashboard/purchase-coins");
-          } else {
-            setUser(updatedUser.data); 
+        const userResponse = await axios.patch(
+          "http://localhost:5000/users/deduct-coins",
+          {
+            email: user.email,
+            amount: totalPayableAmount,
           }
-  
+        );
+
+        if (userResponse.status === 200) {
+          const updatedUserData = await axios.get(
+            `http://localhost:5000/users/${user.email}`
+          );
+          setUser(updatedUserData.data);
           Swal.fire({
             icon: "success",
             title: "Task added successfully!",
             timer: 2000,
             showConfirmButton: false,
           });
-          navigate('/dashboard/my-tasks');
+          navigate("/dashboard/my-tasks");
         }
       }
     } catch (error) {
       console.error("Error adding task:", error);
-      
-      setUser(user);
-  
+      setUser(user); // Revert to original user state on failure
       Swal.fire({
         icon: "error",
         title: "Failed to add task",
@@ -125,7 +130,7 @@ const AddTask = () => {
       });
     }
   };
-  
+
   return (
     <div className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-4">Add New Task</h2>
