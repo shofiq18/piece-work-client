@@ -3,13 +3,14 @@ import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const BuyerDashboardHome = () => {
-  const { user, setUser } = useContext(AuthContext); // Access setUser from AuthContext
+  const { user, setUser } = useContext(AuthContext);
   const [buyerStats, setBuyerStats] = useState(null);
   const [submissions, setSubmissions] = useState([]);
-  const [selectedSubmission, setSelectedSubmission] = useState(null); // For modal
+  const [selectedSubmission, setSelectedSubmission] = useState(null);
+  const [loadingSubmissions, setLoadingSubmissions] = useState(true); // New loading state
   const axiosSecure = useAxiosSecure();
 
-  // Fetch buyer stats (total tasks, pending tasks, total payment paid)
+  // Fetch buyer stats
   const fetchBuyerStats = async () => {
     try {
       const response = await axiosSecure.get(`/buyer-home/${user.email}`);
@@ -19,53 +20,55 @@ const BuyerDashboardHome = () => {
     }
   };
 
+  // Fetch pending submissions
+  const fetchSubmissions = async () => {
+    setLoadingSubmissions(true);
+    try {
+      const response = await axiosSecure.get(`/buyer-home/submissions/${user.email}`);
+      setSubmissions(response.data);
+    } catch (error) {
+      console.error("Error fetching submissions:", error);
+    } finally {
+      setLoadingSubmissions(false);
+    }
+  };
+
   useEffect(() => {
     if (user) {
       fetchBuyerStats();
-    }
-  }, [user, axiosSecure]);
-
-  // Fetch pending submissions for tasks
-  useEffect(() => {
-    if (user) {
-      const fetchSubmissions = async () => {
-        try {
-          const response = await axiosSecure.get(`/buyer-home/submissions/${user.email}`);
-          console.log("Fetched Submissions: ", response.data);
-          setSubmissions(response.data);
-        } catch (error) {
-          console.error("Error fetching submissions:", error);
-        }
-      };
-
       fetchSubmissions();
     }
   }, [user, axiosSecure]);
+  
 
-  // Approve submission
   const approveSubmission = async (submissionId, workerEmail, payableAmount) => {
     try {
-      const response = await axiosSecure.patch(`/submissions/approve/${submissionId}`, {
+      const response = await axiosSecure.put(`/approve-submission/${submissionId}`, {
         workerEmail,
         payableAmount,
       });
       alert("Submission approved successfully!");
-
+  
       // Update user's coin balance in AuthContext
       setUser((prevUser) => ({
         ...prevUser,
-        coins: prevUser.coins - payableAmount, // Deduct coins
+        coins: prevUser.coins - payableAmount, // Deduct coins for buyer
       }));
-
+  
+      // Optionally, update worker's coins in UI
+      // Here, you could also set a state for the worker's coins if needed
+  
       // Remove approved submission from the list
       setSubmissions((prev) => prev.filter((submission) => submission._id !== submissionId));
-
+  
       // Fetch updated buyer stats
       fetchBuyerStats();
     } catch (error) {
       console.error("Error approving submission:", error);
+      alert("Failed to approve submission. Please try again.");
     }
   };
+  
 
   // Reject submission
   const rejectSubmission = async (submissionId, taskId) => {
@@ -109,7 +112,9 @@ const BuyerDashboardHome = () => {
 
       {/* Submissions Table */}
       <h2 className="text-2xl font-semibold my-6">Tasks To Review</h2>
-      {submissions.length > 0 ? (
+      {loadingSubmissions ? (
+        <p>Loading submissions...</p>
+      ) : submissions.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="table-auto w-full bg-white rounded-lg shadow">
             <thead>
@@ -169,6 +174,7 @@ const BuyerDashboardHome = () => {
             <p><strong>Task Title:</strong> {selectedSubmission.task_title}</p>
             <p><strong>Worker Name:</strong> {selectedSubmission.worker_name}</p>
             <p><strong>Payable Amount:</strong> ${selectedSubmission.payable_amount}</p>
+            <p><strong>Status:</strong> {selectedSubmission.status}</p>
             <p className="mt-4"><strong>Submission Info:</strong></p>
             <p className="bg-gray-100 p-4 rounded-lg">{selectedSubmission.submission_info}</p>
             <div className="mt-6 flex justify-end space-x-4">

@@ -10,7 +10,7 @@ import DashboardLayout from "../Dashboard/DashboardLayout ";
 
 
 // worker
-import DashboardHome from "../Dashboard/worker/DashboardHome";
+import WorkerHome from "../Dashboard/Worker/WorkerHome";
 import TaskList from "../Dashboard/worker/TaskList";
 import Submissions from "../Dashboard/worker/Submissions";
 import Withdrawals from "../Dashboard/worker/Withdrawals";
@@ -22,11 +22,11 @@ import MyTasks from "../Dashboard/Buyer/MyTasks";
 import PurchaseCoins from "../Dashboard/Buyer/PurchaseCoins";
 
 // Admin page
-import AdminDashboardHome from "../Dashboard/Admin/AdminDashboardHome";
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
 import ManageTasks from "../Dashboard/Admin/ManageTasks";
 import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
 import TaskDetails from "../Dashboard/Worker/TaskDetails";
+import AdminHome from "../Dashboard/Admin/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       // Worker Routes
       {
         path: "/dashboard/worker-home",
-        element: <DashboardHome></DashboardHome>, // Worker Dashboard Home
+        element: <WorkerHome></WorkerHome>, // Worker Dashboard Home
       },
       {
         path: "/dashboard/tasks",
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
 
       {
         path: "/dashboard/admin-home",
-        element: <AdminDashboardHome></AdminDashboardHome>, // Admin Dashboard Home
+        element: <AdminHome></AdminHome>, // Admin Dashboard Home
       },
       {
         path: "/dashboard/manage-users",

@@ -36,15 +36,15 @@ const ManageUsers = () => {
   // Handle role change with coin adjustment
   const handleRoleChange = async (id, newRole) => {
     let newCoins;
-    if (newRole === "Buyer") newCoins = 50; // Default coins for Buyer
-    if (newRole === "Worker") newCoins = 10; // Default coins for Worker
+    if (newRole === "Buyer") newCoins = 50; 
+    if (newRole === "Worker") newCoins = 10; 
 
     try {
       const payload = { role: newRole, ...(newCoins !== undefined && { coins: newCoins }) };
 
-      await axiosSecure.patch(`/users/${id}`, payload); // Send updated role and coins
+      await axiosSecure.patch(`/users/${id}`, payload); 
       Swal.fire("Success!", "User role and coins have been updated.", "success");
-      refetch(); // Refresh the data
+      refetch(); 
     } catch (error) {
       Swal.fire("Error!", "Failed to update the user role.", "error");
     }
