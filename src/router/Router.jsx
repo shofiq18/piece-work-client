@@ -20,6 +20,10 @@ import BuyerDashboardHome from "../Dashboard/Buyer/BuyerDashboardHome";
 import AddTasks from "../Dashboard/Buyer/AddTask";
 import MyTasks from "../Dashboard/Buyer/MyTasks";
 import PurchaseCoins from "../Dashboard/Buyer/PurchaseCoins";
+import CheckoutPage from "../Dashboard/Buyer/CheckoutPage";
+import CheckoutForm from "../Dashboard/Buyer/CheckoutForm";
+
+
 
 // Admin page
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
@@ -27,6 +31,8 @@ import ManageTasks from "../Dashboard/Admin/ManageTasks";
 import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
 import TaskDetails from "../Dashboard/Worker/TaskDetails";
 import AdminHome from "../Dashboard/Admin/AdminHome";
+import MyProfile from "../page/UserProfile";
+import UserProfile from "../page/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfile></UserProfile>,
       },
     ],
   },
@@ -94,6 +104,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/payment-history",
         element: <PaymentHistory></PaymentHistory>, // Purchase Coins Page for Buyer
+      },
+      {
+        path: "/dashboard/checkout",
+        element: <CheckoutPage></CheckoutPage>, 
+      },
+      {
+        path: "/dashboard/buy-coin",
+        element: <CheckoutForm></CheckoutForm>, 
       },
 
       // Admin Routes

@@ -68,7 +68,7 @@ const DashboardLayout = () => {
       </div>
 
       <footer className="bg-gray-800 text-white text-center py-3">
-        <p>© 2025 FoodBridge | All Rights Reserved</p>
+        <p>© 2025 Piece Work | All Rights Reserved</p>
       </footer>
     </div>
   );

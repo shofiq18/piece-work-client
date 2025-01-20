@@ -23,8 +23,8 @@ const Navbar = () => {
     const loggedInNavOptions = (
         <>
             <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/available-coin">Available Coin</Link></li>
-            <li><Link to="/profile">User Profile</Link></li>
+            <li><Link to="/available-coin">Available Coin ({user?.coins || 0})</Link></li>
+            <li><Link to="/user-profile">User Profile</Link></li>
         </>
     );
 
