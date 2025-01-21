@@ -50,3 +50,26 @@ body {
         height: 300px; /* Adjust image height for mobile devices */
     }
 }
+
+
+/* testimonieal section css */
+/* Keyframes for the slide animation */
+@keyframes slide {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Infinite slide animation */
+  .animate-slide {
+    animation: slide 5s linear infinite;
+  }
+  
+  /* Pause animation on hover */
+  .hover\:animate-paused:hover {
+    animation-play-state: paused;
+  }
+  
