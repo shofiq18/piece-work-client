@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Navigate } from "react-router-dom";
 
 const BuyerDashboardHome = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -65,7 +66,7 @@ const BuyerDashboardHome = () => {
       fetchBuyerStats();
     } catch (error) {
       console.error("Error approving submission:", error);
-      alert("Failed to approve submission. Please try again.");
+      alert("Not enough coin for payment . purchase the coin");
     }
   };
   

@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaUsers, FaMoneyBillAlt, FaCoins, FaUserTie } from "react-icons/fa";
+import WithdrawRequests from "./WithdrawRequests";
 
 const AdminHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,7 +23,8 @@ const AdminHome = () => {
   const { totalWorkers, totalBuyers, totalAvailableCoins, totalPayments } = stats;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+   <div>
+     <div className="max-w-4xl mb-12 mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-center mb-6">Admin Dashboard</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -63,6 +65,9 @@ const AdminHome = () => {
         </div>
       </div>
     </div>
+    <WithdrawRequests></WithdrawRequests>
+   </div>
+    
   );
 };
 
