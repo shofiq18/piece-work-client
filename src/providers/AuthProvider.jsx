@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
   // Fetch user details from backend
   const fetchUserDetails = async (email) => {
     try {
-      const response = await fetch(`http://localhost:5000/users/${email}`);
+      const response = await fetch(`https://piece-work-server.vercel.app/users/${email}`);
       if (response.ok) {
         const userData = await response.json();
         setUser(userData); // Set user with backend data

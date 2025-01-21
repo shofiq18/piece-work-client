@@ -97,7 +97,7 @@ const Register = () => {
         photo: uploadedImageUrl,
         coins: role === "Worker" ? 10 : role === "Buyer" ? 50 : 0,
       };
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://piece-work-server.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -149,7 +149,7 @@ const Register = () => {
         coins: 10,
       };
 
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://piece-work-server.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),

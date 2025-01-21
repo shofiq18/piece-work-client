@@ -6,14 +6,6 @@ Piece Work is an innovative micro-task and earning platform that connects buyers
 
 
 
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
-
 
 ## 🔗 Live Site URL:
 http://localhost:5173/

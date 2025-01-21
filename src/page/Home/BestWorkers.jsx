@@ -6,7 +6,7 @@ const BestWorkers = () => {
   useEffect(() => {
     const fetchTopWorkers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/top-workers"); // Replace with your backend URL
+        const response = await fetch("https://piece-work-server.vercel.app/top-workers"); // Replace with your backend URL
         const data = await response.json();
         setTopWorkers(data);
       } catch (error) {

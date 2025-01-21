@@ -20,7 +20,7 @@ const Submissions = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/submissions?page=${currentPage}&limit=${limit}&worker_email=${user.email}`
+          `https://piece-work-server.vercel.app/submissions?page=${currentPage}&limit=${limit}&worker_email=${user.email}`
         );
 
         // Extract data from the response

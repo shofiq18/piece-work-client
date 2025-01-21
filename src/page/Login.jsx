@@ -16,7 +16,7 @@ const Login = () => {
         const user = result.user;
 
         // Fetch user data from the backend
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://piece-work-server.vercel.app/users/${user.email}`)
           .then((res) => res.json())
           .then((data) => {
             if (data) {
@@ -56,7 +56,7 @@ const Login = () => {
       const user = result.user;
 
       // Fetch user data from the backend
-      const response = await fetch(`http://localhost:5000/users/${user.email}`);
+      const response = await fetch(`https://piece-work-server.vercel.app/users/${user.email}`);
       if (response.ok) {
         const data = await response.json();
         setUser(data);

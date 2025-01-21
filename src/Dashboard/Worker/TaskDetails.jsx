@@ -19,7 +19,7 @@
 //   useEffect(() => {
 //     const fetchTaskDetails = async () => {
 //       try {
-//         const response = await axios.get(`http://localhost:5000/tasks/${taskId}`);
+//         const response = await axios.get(`https://piece-work-server.vercel.app/tasks/${taskId}`);
 //         setTask(response.data);
 //       } catch (error) {
 //         console.error("Error fetching task details:", error);
@@ -48,7 +48,7 @@
 //     };
 
 //     try {
-//       await axios.post("http://localhost:5000/submissions", submissionData);
+//       await axios.post("https://piece-work-server.vercel.app/submissions", submissionData);
 //       alert("Submission successful!");
 //       navigate("/tasks"); // Redirect to task list or another page
 //     } catch (error) {
@@ -129,7 +129,7 @@ const TaskDetails = () => {
   useEffect(() => {
     const fetchTaskDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/tasks/${taskId}`);
+        const response = await axios.get(`https://piece-work-server.vercel.app/tasks/${taskId}`);
         setTask(response.data);
       } catch (error) {
         console.error("Error fetching task details:", error);
@@ -158,7 +158,7 @@ const TaskDetails = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/submissions", submissionData);
+      await axios.post("https://piece-work-server.vercel.app/submissions", submissionData);
       alert("Submission successful!");
       navigate("/dashboard/submissions"); // Redirect to task list or another page
     } catch (error) {

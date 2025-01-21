@@ -16,7 +16,7 @@ const MyTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/tasks/user/${user.email}`);
+        const response = await axios.get(`https://piece-work-server.vercel.app/tasks/user/${user.email}`);
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -29,17 +29,17 @@ const MyTasks = () => {
   // Handle task update
   const handleUpdate = async () => {
     try {
-      await axios.patch(`http://localhost:5000/tasks/${selectedTask._id}`, updateForm);
+      await axios.patch(`https://piece-work-server.vercel.app/tasks/${selectedTask._id}`, updateForm);
       alert("Task updated successfully!");
       setSelectedTask(null);
       setUpdateForm({ task_title: "", task_detail: "", submission_info: "" });
       
       // Fetch updated user data and update the context
-      const response = await axios.get(`http://localhost:5000/users/${user.email}`);
+      const response = await axios.get(`https://piece-work-server.vercel.app/users/${user.email}`);
       setUser(response.data); // Update the user data in context
 
       // Refresh tasks
-      const tasksResponse = await axios.get(`http://localhost:5000/tasks/user/${user.email}`);
+      const tasksResponse = await axios.get(`https://piece-work-server.vercel.app/tasks/user/${user.email}`);
       setTasks(tasksResponse.data);
     } catch (error) {
       console.error("Error updating task:", error);
@@ -50,12 +50,12 @@ const MyTasks = () => {
   // Handle task delete
   const handleDelete = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+      await axios.delete(`https://piece-work-server.vercel.app/tasks/${taskId}`);
       alert("Task deleted successfully!");
       setTasks(tasks.filter((task) => task._id !== taskId));
 
       // Fetch updated user data and update the context
-      const response = await axios.get(`http://localhost:5000/users/${user.email}`);
+      const response = await axios.get(`https://piece-work-server.vercel.app/users/${user.email}`);
       setUser(response.data); // Update the user data in context
     } catch (error) {
       console.error("Error deleting task:", error);

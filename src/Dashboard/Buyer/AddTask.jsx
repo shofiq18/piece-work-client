@@ -96,10 +96,10 @@ const AddTask = () => {
     setUser(updatedUser);
 
     try {
-      const taskResponse = await axios.post("http://localhost:5000/tasks", taskToSend);
+      const taskResponse = await axios.post("https://piece-work-server.vercel.app/tasks", taskToSend);
       if (taskResponse.status === 201) {
         const userResponse = await axios.patch(
-          "http://localhost:5000/users/deduct-coins",
+          "https://piece-work-server.vercel.app/users/deduct-coins",
           {
             email: user.email,
             amount: totalPayableAmount,
@@ -108,7 +108,7 @@ const AddTask = () => {
 
         if (userResponse.status === 200) {
           const updatedUserData = await axios.get(
-            `http://localhost:5000/users/${user.email}`
+            `https://piece-work-server.vercel.app/users/${user.email}`
           );
           setUser(updatedUserData.data);
           Swal.fire({

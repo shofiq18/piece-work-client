@@ -18,7 +18,7 @@ const ManageTasks = () => {
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/tasks");
+      const response = await axios.get("https://piece-work-server.vercel.app/tasks");
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -41,7 +41,7 @@ const ManageTasks = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(`http://localhost:5000/tasks/${id}`);
+          const response = await axios.delete(`https://piece-work-server.vercel.app/tasks/${id}`);
           if (response.status === 200) {
             // Update UI
             const updatedTasks = tasks.filter((task) => task._id !== id);
