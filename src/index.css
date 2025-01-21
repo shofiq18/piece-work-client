@@ -52,24 +52,16 @@ body {
 }
 
 
-/* testimonieal section css */
-/* Keyframes for the slide animation */
+/* Add this CSS in your global stylesheet */
 @keyframes slide {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+  0% {
+    transform: translateX(100%);
   }
-  
-  /* Infinite slide animation */
-  .animate-slide {
-    animation: slide 5s linear infinite;
+  100% {
+    transform: translateX(-100%);
   }
-  
-  /* Pause animation on hover */
-  .hover\:animate-paused:hover {
-    animation-play-state: paused;
-  }
-  
+}
+
+.animate-slide {
+  animation: slide 15s linear infinite;
+}

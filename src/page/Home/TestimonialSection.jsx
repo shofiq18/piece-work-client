@@ -1,9 +1,9 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 const testimonials = [
   {
@@ -31,14 +31,14 @@ const testimonials = [
     id: 4,
     name: "Mark",
     feedback:
-      "This platform offers great opportunities to earn extra income.",
+      "I appreciate the variety of tasks available. It's a reliable platform for extra income.",
     photo: "https://randomuser.me/api/portraits/men/1.jpg",
   },
   {
     id: 5,
     name: "Mark Smooth",
     feedback:
-      "Fantastic platform with lots of earning opportunities for everyone.",
+      "I appreciate the variety of tasks available. It's a reliable platform for extra income.",
     photo: "https://randomuser.me/api/portraits/women/2.jpg",
   },
 ];
@@ -75,7 +75,7 @@ const TestimonialSection = () => {
         >
           {testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <div className="bg-white p-6 rounded-tr-full shadow-md text-center animate-slide hover:animate-paused">
+              <div className="bg-white p-6 rounded-tr-full shadow-md text-center animate-slide">
                 <img
                   src={testimonial.photo}
                   alt={testimonial.name}
