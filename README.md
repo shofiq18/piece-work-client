@@ -8,12 +8,12 @@ Piece Work is an innovative micro-task and earning platform that connects buyers
 
 
 ## 🔗 Live Site URL:
-http://localhost:5173/
+https://piece-work-e8024.web.app/
 
 
 ## 🛠️ Admin Credentials:
 
-- Email: shofiq@gmail.com 
+- Username: shafiq
 - Password: 1234Sh
 
 
