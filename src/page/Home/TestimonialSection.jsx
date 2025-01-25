@@ -75,7 +75,7 @@ const TestimonialSection = () => {
         >
           {testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <div className="bg-white p-6 rounded-tr-full shadow-md text-center animate-slide">
+              <div className="bg-white p-6 rounded-bl-3xl  rounded-tr-3xl shadow-md text-center animate-slide">
                 <img
                   src={testimonial.photo}
                   alt={testimonial.name}

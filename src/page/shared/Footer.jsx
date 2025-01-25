@@ -7,7 +7,7 @@ const Footer = () => {
                 <aside>
                    
                     <p>
-                        <span className="text-green-600  text-3xl font-bold">PieceWork</span>
+                        <span className="text-green-600   text-3xl font-bold">PieceWork</span>
                         <br />
                         Empowering productivity through micro-tasks and seamless earning opportunities.
                     </p>

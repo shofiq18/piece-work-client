@@ -1,14 +1,13 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Navigate } from "react-router-dom";
 
 const BuyerDashboardHome = () => {
   const { user, setUser } = useContext(AuthContext);
   const [buyerStats, setBuyerStats] = useState(null);
   const [submissions, setSubmissions] = useState([]);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
-  const [loadingSubmissions, setLoadingSubmissions] = useState(true); // New loading state
+  const [loadingSubmissions, setLoadingSubmissions] = useState(true);
   const axiosSecure = useAxiosSecure();
 
   // Fetch buyer stats
@@ -40,47 +39,31 @@ const BuyerDashboardHome = () => {
       fetchSubmissions();
     }
   }, [user, axiosSecure]);
-  
 
   const approveSubmission = async (submissionId, workerEmail, payableAmount) => {
     try {
-      const response = await axiosSecure.put(`/approve-submission/${submissionId}`, {
+      await axiosSecure.put(`/approve-submission/${submissionId}`, {
         workerEmail,
         payableAmount,
       });
       alert("Submission approved successfully!");
-  
-      // Update user's coin balance in AuthContext
       setUser((prevUser) => ({
         ...prevUser,
-        coins: prevUser.coins - payableAmount, // Deduct coins for buyer
+        coins: prevUser.coins - payableAmount,
       }));
-  
-      // Optionally, update worker's coins in UI
-      // Here, you could also set a state for the worker's coins if needed
-  
-      // Remove approved submission from the list
       setSubmissions((prev) => prev.filter((submission) => submission._id !== submissionId));
-  
-      // Fetch updated buyer stats
       fetchBuyerStats();
     } catch (error) {
       console.error("Error approving submission:", error);
-      alert("Not enough coin for payment . purchase the coin");
+      alert("Not enough coin for payment. Purchase the coin.");
     }
   };
-  
 
-  // Reject submission
   const rejectSubmission = async (submissionId, taskId) => {
     try {
       await axiosSecure.patch(`/submissions/reject/${submissionId}`, { taskId });
       alert("Submission rejected successfully!");
-
-      // Remove rejected submission from the list
       setSubmissions((prev) => prev.filter((submission) => submission._id !== submissionId));
-
-      // Fetch updated buyer stats
       fetchBuyerStats();
     } catch (error) {
       console.error("Error rejecting submission:", error);
@@ -89,32 +72,36 @@ const BuyerDashboardHome = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-3xl font-semibold mb-6">Buyer Dashboard</h1>
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+        Buyer Dashboard
+      </h1>
 
       {/* Buyer Stats */}
       {buyerStats ? (
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-4 rounded-lg shadow">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-medium">Total Tasks</h2>
-            <p className="text-2xl font-bold">{buyerStats.totalTasks}</p>
+            <p className="text-4xl font-extrabold">{buyerStats.totalTasks}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
+          <div className="bg-gradient-to-r from-yellow-500 to-yellow-400 text-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-medium">Pending Tasks</h2>
-            <p className="text-2xl font-bold">{buyerStats.pendingTasks}</p>
+            <p className="text-4xl font-extrabold">{buyerStats.pendingTasks}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
+          <div className="bg-gradient-to-r from-green-500 to-green-400 text-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-medium">Total Payment Paid</h2>
-            <p className="text-2xl font-bold">${buyerStats.totalPayment}</p>
+            <p className="text-4xl font-extrabold">${buyerStats.totalPayment}</p>
           </div>
         </div>
       ) : (
-        <div className="text-lg">Loading Buyer Stats...</div>
+        <div className="text-lg text-gray-700">Loading Buyer Stats...</div>
       )}
 
       {/* Submissions Table */}
-      <h2 className="text-2xl font-semibold my-6">Tasks To Review</h2>
+      <h2 className="text-3xl font-semibold text-gray-800 my-6">
+        Tasks To Review
+      </h2>
       {loadingSubmissions ? (
-        <p>Loading submissions...</p>
+        <p className="text-center text-gray-600">Loading submissions...</p>
       ) : submissions.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="table-auto w-full bg-white rounded-lg shadow">
@@ -134,13 +121,13 @@ const BuyerDashboardHome = () => {
                   <td className="px-4 py-2">${submission.payable_amount}</td>
                   <td className="px-4 py-2 space-x-2">
                     <button
-                      className="bg-blue-500 text-white px-3 py-1 rounded-md"
+                      className="bg-blue-600 text-white px-3 py-1 rounded-md shadow-md hover:bg-blue-700"
                       onClick={() => setSelectedSubmission(submission)}
                     >
-                      View Submission
+                      View
                     </button>
                     <button
-                      className="bg-green-500 text-white px-3 py-1 rounded-md"
+                      className="bg-green-600 text-white px-3 py-1 rounded-md shadow-md hover:bg-green-700"
                       onClick={() =>
                         approveSubmission(
                           submission._id,
@@ -152,7 +139,7 @@ const BuyerDashboardHome = () => {
                       Approve
                     </button>
                     <button
-                      className="bg-red-500 text-white px-3 py-1 rounded-md"
+                      className="bg-red-600 text-white px-3 py-1 rounded-md shadow-md hover:bg-red-700"
                       onClick={() => rejectSubmission(submission._id, submission.task_id)}
                     >
                       Reject
@@ -164,23 +151,22 @@ const BuyerDashboardHome = () => {
           </table>
         </div>
       ) : (
-        <p className="text-lg">No pending submissions to review.</p>
+        <p className="text-lg text-gray-600">No pending submissions to review.</p>
       )}
 
       {/* Modal for Viewing Submission Details */}
       {selectedSubmission && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Submission Details</h3>
+          <div className="bg-white p-6 rounded-lg w-96 shadow-lg relative">
+            <h3 className="text-xl font-bold mb-4">Submission Details</h3>
             <p><strong>Task Title:</strong> {selectedSubmission.task_title}</p>
             <p><strong>Worker Name:</strong> {selectedSubmission.worker_name}</p>
             <p><strong>Payable Amount:</strong> ${selectedSubmission.payable_amount}</p>
-            <p><strong>Status:</strong> {selectedSubmission.status}</p>
             <p className="mt-4"><strong>Submission Info:</strong></p>
             <p className="bg-gray-100 p-4 rounded-lg">{selectedSubmission.submission_info}</p>
             <div className="mt-6 flex justify-end space-x-4">
               <button
-                className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
                 onClick={() => setSelectedSubmission(null)}
               >
                 Close

@@ -3,8 +3,8 @@ import { FaRocket, FaHandHoldingHeart, FaLightbulb } from "react-icons/fa";
 
 const VisionMission = () => {
   return (
-    <section className="bg-gray-100 py-16">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="bg-gray-100 px-6 py-16">
+      <div className="max-w-7xl mx-auto ">
         <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
           Our Vision & Mission
         </h2>

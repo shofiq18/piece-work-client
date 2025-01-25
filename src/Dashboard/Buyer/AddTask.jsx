@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -132,92 +131,110 @@ const AddTask = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-2xl font-bold mb-4">Add New Task</h2>
-      <form onSubmit={handleAddTask}>
-        <div className="mb-4">
-          <label className="block text-gray-700">Task Title</label>
+    <div className="max-w-4xl mx-auto mt-8 p-8 bg-gradient-to-r from-purple-500 to-blue-500 shadow-xl rounded-xl">
+      <h2 className="text-3xl font-bold text-white text-center mb-8">
+        Add a New Task
+      </h2>
+      <form onSubmit={handleAddTask} className="space-y-6">
+        <div className="flex flex-col mb-6">
+          <label className="text-lg text-white ">
+            Task Title
+          </label>
           <input
             type="text"
             name="task_title"
             value={task.task_title}
             onChange={handleInputChange}
-            className="w-full mt-2 p-2 border rounded-md"
+            className="mt-2 p-4 rounded-lg border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
             required
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Task Detail</label>
+        <div className="flex flex-col mb-6">
+          <label className="text-lg text-white ">
+            Task Detail
+          </label>
           <textarea
             name="task_detail"
             value={task.task_detail}
             onChange={handleInputChange}
-            className="w-full mt-2 p-2 border rounded-md"
+            className="mt-2 p-4 rounded-lg border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
             required
           ></textarea>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Required Workers</label>
-          <input
-            type="number"
-            name="required_workers"
-            value={task.required_workers}
-            onChange={handleInputChange}
-            className="w-full mt-2 p-2 border rounded-md"
-            required
-          />
+        <div className="grid grid-cols-2 gap-6">
+          <div className="flex flex-col mb-6">
+            <label className="text-lg text-white ">
+              Required Workers
+            </label>
+            <input
+              type="number"
+              name="required_workers"
+              value={task.required_workers}
+              onChange={handleInputChange}
+              className="mt-2 p-4 rounded-lg border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
+              required
+            />
+          </div>
+          <div className="flex flex-col mb-6">
+            <label className="text-lg text-white ">
+              Payable Amount per Worker
+            </label>
+            <input
+              type="number"
+              name="payable_amount"
+              value={task.payable_amount}
+              onChange={handleInputChange}
+              className="mt-2 p-4 rounded-lg border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
+              required
+            />
+          </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Payable Amount per Worker</label>
-          <input
-            type="number"
-            name="payable_amount"
-            value={task.payable_amount}
-            onChange={handleInputChange}
-            className="w-full mt-2 p-2 border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Completion Date</label>
+        <div className="flex flex-col mb-6">
+          <label className="text-lg text-white ">
+            Completion Date
+          </label>
           <input
             type="date"
             name="completion_date"
             value={task.completion_date}
             onChange={handleInputChange}
-            className="w-full mt-2 p-2 border rounded-md"
+            className="mt-2 p-4 rounded-lg border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
             required
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Submission Info</label>
+        <div className="flex flex-col mb-6">
+          <label className="text-lg text-white ">
+            Submission Info
+          </label>
           <textarea
             name="submission_info"
             value={task.submission_info}
             onChange={handleInputChange}
-            className="w-full mt-2 p-2 border rounded-md"
+            className="mt-2 p-4 rounded-lg border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
             required
           ></textarea>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Upload Task Image</label>
+        <div className="flex flex-col mb-6">
+          <label className="text-lg text-white ">
+            Upload Task Image
+          </label>
           <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="w-full mt-2 p-2 border rounded-md"
+            className="mt-2 p-4 rounded-lg  file:cursor-pointer file:py-2 file:px-4 file:rounded-lg file:bg-indigo-600 file:text-white transition duration-300"
           />
           {task.task_image_url && (
             <img
               src={task.task_image_url}
               alt="Task Preview"
-              className="mt-4 w-32 h-32 object-cover rounded-md"
+              className="mt-4 w-40 h-40 object-cover rounded-lg shadow-lg"
             />
           )}
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-lg"
         >
           Add Task
         </button>
