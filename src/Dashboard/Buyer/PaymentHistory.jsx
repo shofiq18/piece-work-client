@@ -3,7 +3,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PaymentHistory = () => {
-  const { user } = useContext(AuthContext); // Get the logged-in user's email
+  const { user } = useContext(AuthContext); 
   const [payments, setPayments] = useState([]);
   const axiosSecure = useAxiosSecure();
 

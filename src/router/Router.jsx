@@ -5,15 +5,23 @@ import Login from "../page/Login";
 import Register from "../page/Register";
 import Home from "../page/Home/Home";
 import DashboardLayout from "../Dashboard/DashboardLayout ";
+import UserProfile from "../page/UserProfile";
+
 
 
 
 
 // worker
 import WorkerHome from "../Dashboard/Worker/WorkerHome";
-import TaskList from "../Dashboard/worker/TaskList";
-import Submissions from "../Dashboard/worker/Submissions";
-import Withdrawals from "../Dashboard/worker/Withdrawals";
+import TaskDetails from "../Dashboard/Worker/TaskDetails";
+import Withdrawals from "../Dashboard/Worker/Withdrawals";
+import Submissions from "../Dashboard/Worker/Submissions";
+import TaskList from "../Dashboard/Worker/TaskList";
+
+
+
+
+
 
 // Buyer page 
 import BuyerDashboardHome from "../Dashboard/Buyer/BuyerDashboardHome";
@@ -22,17 +30,15 @@ import MyTasks from "../Dashboard/Buyer/MyTasks";
 import PurchaseCoins from "../Dashboard/Buyer/PurchaseCoins";
 import CheckoutPage from "../Dashboard/Buyer/CheckoutPage";
 import CheckoutForm from "../Dashboard/Buyer/CheckoutForm";
+import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
+
 
 
 
 // Admin page
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
 import ManageTasks from "../Dashboard/Admin/ManageTasks";
-import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
-import TaskDetails from "../Dashboard/Worker/TaskDetails";
 import AdminHome from "../Dashboard/Admin/AdminHome";
-import MyProfile from "../page/UserProfile";
-import UserProfile from "../page/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -59,51 +65,52 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>, // Shared Dashboard Layout
+    element: <DashboardLayout></DashboardLayout>, 
     children: [
+
       // Worker Routes
       {
         path: "/dashboard/worker-home",
-        element: <WorkerHome></WorkerHome>, // Worker Dashboard Home
+        element: <WorkerHome></WorkerHome>, 
       },
       {
         path: "/dashboard/tasks",
-        element: <TaskList></TaskList>, // Task List for Worker
+        element: <TaskList></TaskList>, 
       },
       {
         path: "/dashboard/tasks/:taskId",
-        element: <TaskDetails></TaskDetails>, // Task List for Worker
+        element: <TaskDetails></TaskDetails>, 
       },
       {
         path: "/dashboard/submissions",
-        element: <Submissions></Submissions>, // Submissions Page for Worker
+        element: <Submissions></Submissions>, 
       },
       {
         path: "/dashboard/withdrawals",
-        element: <Withdrawals></Withdrawals>, // Withdrawals Page for Worker
+        element: <Withdrawals></Withdrawals>, 
       },
 
       // Buyer Routes
 
       {
         path: "/dashboard/buyer-home",
-        element: <BuyerDashboardHome></BuyerDashboardHome>, // Buyer Dashboard Home
+        element: <BuyerDashboardHome></BuyerDashboardHome>, 
       },
       {
         path: "/dashboard/add-tasks",
-        element: <AddTasks></AddTasks>, // Add Tasks Page for Buyer
+        element: <AddTasks></AddTasks>, 
       },
       {
         path: "/dashboard/my-tasks",
-        element: <MyTasks></MyTasks>, // My Tasks Page for Buyer
+        element: <MyTasks></MyTasks>, 
       },
       {
         path: "/dashboard/purchase-coins",
-        element: <PurchaseCoins></PurchaseCoins>, // Purchase Coins Page for Buyer
+        element: <PurchaseCoins></PurchaseCoins>, 
       },
       {
         path: "/dashboard/payment-history",
-        element: <PaymentHistory></PaymentHistory>, // Purchase Coins Page for Buyer
+        element: <PaymentHistory></PaymentHistory>, 
       },
       {
         path: "/dashboard/checkout",
@@ -118,15 +125,15 @@ const router = createBrowserRouter([
 
       {
         path: "/dashboard/admin-home",
-        element: <AdminHome></AdminHome>, // Admin Dashboard Home
+        element: <AdminHome></AdminHome>,
       },
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers></ManageUsers>, // Manage Users Page for Admin
+        element: <ManageUsers></ManageUsers>, 
       },
       {
         path: "/dashboard/manage-tasks",
-        element: <ManageTasks></ManageTasks>, // Manage Tasks Page for Admin
+        element: <ManageTasks></ManageTasks>, 
       },
     ],
   },

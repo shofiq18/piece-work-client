@@ -7,7 +7,7 @@ const PurchaseCoins = () => {
 
   // Handle package selection
   const handlePackageSelect = (pkg) => {
-    navigate(`/dashboard/checkout`, { state: { package: pkg } }); // Pass package details to the checkout page
+    navigate(`/dashboard/checkout`, { state: { package: pkg } }); 
   };
 
   return (

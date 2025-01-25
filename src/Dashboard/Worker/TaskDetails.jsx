@@ -6,8 +6,8 @@ import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const TaskDetails = () => {
-  const { taskId } = useParams(); // Get taskId from the route parameter
-  const { user, loading } = useContext(AuthContext); // Get user from AuthContext
+  const { taskId } = useParams(); 
+  const { user, loading } = useContext(AuthContext); 
   const [task, setTask] = useState(null);
   const [submissionDetails, setSubmissionDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,7 +47,7 @@ const TaskDetails = () => {
       payable_amount: task.payable_amount,
       worker_email: user.email,
       submission_details: submissionDetails,
-      worker_name: user.displayName || user.name, // Use displayName if available, else fallback to user.name
+      worker_name: user.displayName || user.name, 
       buyer_name: task.buyer_name,
       buyer_email: task.buyer_email,
       current_date: new Date().toISOString(),
@@ -57,7 +57,7 @@ const TaskDetails = () => {
     try {
       await axios.post("https://piece-work-server.vercel.app/submissions", submissionData);
       alert("Submission successful!");
-      navigate("/dashboard/submissions"); // Redirect to task list or another page
+      navigate("/dashboard/submissions"); 
     } catch (error) {
       console.error("Error submitting task:", error);
       alert("Failed to submit. Please try again.");

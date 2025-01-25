@@ -10,7 +10,7 @@ const Submissions = () => {
   const [totalSubmissions, setTotalSubmissions] = useState(0); 
   const [error, setError] = useState(null);
 
-  const limit = 10; // Number of submissions per page
+  const limit = 10; 
 
   // Fetch paginated submissions for the logged-in worker
   useEffect(() => {

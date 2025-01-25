@@ -1,88 +1,4 @@
-// import React, { useState } from "react";
-// import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-// const CheckoutForm = ({ selectedPackage }) => {
-//   const stripe = useStripe();
-//   const elements = useElements();
-//   const axiosSecure = useAxiosSecure();
-//   const [isProcessing, setIsProcessing] = useState(false);
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     if (!stripe || !elements) return;
-
-//     setIsProcessing(true);
-//     try {
-//       const card = elements.getElement(CardElement);
-//       const { paymentMethod, error } = await stripe.createPaymentMethod({
-//         type: "card",
-//         card,
-//       });
-
-//       if (error) {
-//         console.error("Error creating payment method:", error);
-//         setIsProcessing(false);
-//         return;
-//       }
-
-//       const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-//         "{clientSecret}", // Replace with your clientSecret
-//         {
-//           payment_method: paymentMethod.id,
-//         }
-//       );
-
-//       if (confirmError) {
-//         console.error("Error confirming payment:", confirmError);
-//         setIsProcessing(false);
-//         return;
-//       }
-
-//       // Save the payment info and update coins
-     
-
-
-//     const paymentData = {
-//         packageId: selectedPackage.id, // Optional, in case you store package IDs
-//         coins: selectedPackage.coins,
-//         amount: selectedPackage.price,
-//         transactionId: paymentIntent.id, // Unique ID from Stripe
-//         paymentStatus: "success",
-//       };
-
-//       // Send payment info to the backend
-//       try {
-//         const response = await axiosSecure.post("/payment-success", paymentData);
-//         if (response.data.success) {
-//           alert("Payment successful! Your coins have been added.");
-//         }
-//         setIsProcessing(false);
-//       } catch (saveError) {
-//         console.error("Error saving payment info:", saveError);
-//         setIsProcessing(false);
-//       }
-//     } catch (error) {
-//       console.error("Payment error:", error);
-//       setIsProcessing(false);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow">
-//       <CardElement className="mb-4 p-2 border rounded-lg" />
-//       <button
-//         type="submit"
-//         className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50"
-//         disabled={!stripe || isProcessing}
-//       >
-//         {isProcessing ? "Processing..." : "Pay Now"}
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default CheckoutForm;
 
 import React, { useState, useContext } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -92,7 +8,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 const CheckoutForm = ({ clientSecret, selectedPackage }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const { user, setUser } = useContext(AuthContext); // Get the current user and setUser function from AuthContext
+  const { user, setUser } = useContext(AuthContext); 
 
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
@@ -119,13 +35,13 @@ const CheckoutForm = ({ clientSecret, selectedPackage }) => {
     try {
       // Confirm the payment
       const { paymentIntent, error: paymentError } = await stripe.confirmCardPayment(
-        clientSecret, // Use the passed clientSecret
+        clientSecret, 
         {
           payment_method: {
             card: cardElement,
             billing_details: {
-              name: user?.displayName || "Anonymous User", // Get the user's name from AuthContext
-              email: user?.email || "noemail@example.com", // Get the user's email from AuthContext
+              name: user?.displayName || "Anonymous User", 
+              email: user?.email || "noemail@example.com", 
             },
           },
         }
@@ -147,16 +63,16 @@ const CheckoutForm = ({ clientSecret, selectedPackage }) => {
 
         // Save the payment info and update coins in your backend
         const paymentDetails = {
-          amount: paymentIntent.amount / 100, // Amount in dollars
+          amount: paymentIntent.amount / 100, 
           transactionId: paymentIntent.id,
-          email: user?.email, // Email from AuthContext
-          coins: selectedPackage.coins, // Coins purchased
+          email: user?.email, 
+          coins: selectedPackage.coins, 
           timestamp: new Date(),
         };
 
         try {
           const response = await axios.post(
-            "https://piece-work-server.vercel.app/save-payment", // Backend endpoint
+            "https://piece-work-server.vercel.app/save-payment", 
             paymentDetails
           );
 
@@ -164,7 +80,7 @@ const CheckoutForm = ({ clientSecret, selectedPackage }) => {
             // Update user state using setUser after successful payment
             setUser((prevUser) => ({
               ...prevUser,
-              coins: prevUser.coins + selectedPackage.coins, // Update coins
+              coins: prevUser.coins + selectedPackage.coins, 
             }));
             alert("Payment successful! Coins have been added to your account.");
           } else {
@@ -184,7 +100,7 @@ const CheckoutForm = ({ clientSecret, selectedPackage }) => {
       // Reset the CardElement after payment attempt (successful or failed)
       const cardElement = elements.getElement(CardElement);
       if (cardElement) {
-        cardElement.clear(); // Clears the input fields of CardElement
+        cardElement.clear(); 
       }
     }
   };

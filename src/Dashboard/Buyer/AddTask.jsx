@@ -85,9 +85,9 @@ const AddTask = () => {
 
     const taskToSend = {
       ...task,
-      required_workers: parseInt(required_workers, 10), // Ensure number type
-      payable_amount: parseInt(payable_amount, 10), // Ensure number type
-      email: user.email, // Include user email
+      required_workers: parseInt(required_workers, 10), 
+      payable_amount: parseInt(payable_amount, 10), 
+      email: user.email, 
     };
 
     // Optimistically update the user state
@@ -121,7 +121,7 @@ const AddTask = () => {
       }
     } catch (error) {
       console.error("Error adding task:", error);
-      setUser(user); // Revert to original user state on failure
+      setUser(user); 
       Swal.fire({
         icon: "error",
         title: "Failed to add task",

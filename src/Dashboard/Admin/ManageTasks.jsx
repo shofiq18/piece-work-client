@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const ManageTasks = () => {
-  const { user, setUser } = useContext(AuthContext); // Access user and setUser from AuthContext
+  const { user, setUser } = useContext(AuthContext); 
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -50,9 +50,9 @@ const ManageTasks = () => {
             // Deduct coins (if necessary) and update user state
             const updatedUser = {
               ...user,
-              coins: user.coins + response.data.refundAmount, // Assuming backend sends `refundAmount`
+              coins: user.coins + response.data.refundAmount, 
             };
-            setUser(updatedUser); // Update global user state
+            setUser(updatedUser); 
 
             Swal.fire("Deleted!", response.data.message, "success");
           } else {

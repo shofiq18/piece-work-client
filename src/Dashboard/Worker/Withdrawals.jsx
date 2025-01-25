@@ -4,7 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Withdrawals = () => {
-  const { user, setUser } = useContext(AuthContext); // Fetch user data from AuthContext
+  const { user, setUser } = useContext(AuthContext); 
   const axiosSecure = useAxiosSecure();
 
   const [withdrawCoin, setWithdrawCoin] = useState(0);
@@ -38,7 +38,7 @@ const Withdrawals = () => {
       payment_system: paymentSystem,
       account_number: accountNumber,
       withdraw_date: new Date().toISOString(),
-      status: "pending", // Status will be updated by the admin
+      status: "pending", 
     };
 
     try {
@@ -50,7 +50,7 @@ const Withdrawals = () => {
       // Update user data locally (without requiring a page refresh)
       setUser((prevUser) => ({
         ...prevUser,
-        coins: prevUser.coins - withdrawCoin, // Deduct coins locally for a smooth UI
+        coins: prevUser.coins - withdrawCoin, 
       }));
 
       // Reset form fields

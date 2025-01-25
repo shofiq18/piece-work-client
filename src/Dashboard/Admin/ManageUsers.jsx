@@ -28,7 +28,7 @@ const ManageUsers = () => {
       if (result.isConfirmed) {
         await axiosSecure.delete(`/users/${id}`);
         Swal.fire("Deleted!", "The user has been removed.", "success");
-        refetch(); // Refresh the data
+        refetch(); 
       }
     });
   };

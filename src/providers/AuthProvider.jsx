@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
       const response = await fetch(`https://piece-work-server.vercel.app/users/${email}`);
       if (response.ok) {
         const userData = await response.json();
-        setUser(userData); // Set user with backend data
+        setUser(userData); 
       } else {
         console.error("Failed to fetch user details");
       }
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        fetchUserDetails(currentUser.email); // Fetch user data from backend
+        fetchUserDetails(currentUser.email); 
       } else {
         setUser(null);
       }
