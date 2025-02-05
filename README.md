@@ -2,6 +2,9 @@
 
 
 # Piece Work
+<div align="center">
+  <img src="https://i.ibb.co.com/TMch55k1/Screenshot-7.png" />
+</div>
 
 ## Overview
 Piece Work is a micro-task and earning platform that allows users to create and complete small tasks in exchange for rewards. Employers can post tasks with specific requirements, and workers can complete them to earn coins, which can be withdrawn or used within the platform.
