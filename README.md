@@ -53,7 +53,7 @@ Piece Work is a micro-task and earning platform that allows users to create and 
 ### Steps:
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/piece-work.git
+   git clone https://github.com/shofiq18/piece-work-client.git
    cd piece-work
    ```
 2. **Install dependencies:**
