@@ -1,64 +1,91 @@
 
+
+
 # Piece Work
 
+## Overview
+Piece Work is a micro-task and earning platform that allows users to create and complete small tasks in exchange for rewards. Employers can post tasks with specific requirements, and workers can complete them to earn coins, which can be withdrawn or used within the platform.
 
-Piece Work is an innovative micro-task and earning platform that connects buyers and workers for seamless task collaboration. It enables users to earn by completing tasks or achieve their goals by outsourcing them.
-
-
-
-
-## 🔗 Live Site URL:
-https://piece-work-e8024.web.app/
-
-
-## 🔗 Github URL:
- Github client site: https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-shofiq18
- Github server site: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-shofiq18
-
-
-## 🛠️ Admin Credentials:
-
-- Username: shafiq
-- Password: 1234Sh
-
+## Technologies Used
+- **Frontend:** React.js, Tailwind CSS, DaisyUI
+- **Backend:** Node.js, Express.js, MongoDB
+- **Authentication:** Firebase Authentication
+- **Styling:** Tailwind CSS, DaisyUI, Styled Components
+- **State Management:** React Query
+- **Payment Processing:** Stripe
+- **Image Uploading:** ImageBB API
+- **Animations:** Framer Motion, Animate.css
 
 ## Features
+- Task posting with title, details, completion deadline, and payment structure.
+- Secure authentication using Firebase.
+- Real-time coin deduction and balance updates.
+- Workers can browse and complete tasks.
+- Employers can manage their posted tasks.
+- Coin purchase system for task creators using Stripe.
+- Responsive UI with Tailwind CSS and DaisyUI.
+- Notifications and alerts using SweetAlert2 and React Toastify.
 
-- Seamless Task Posting: Buyers can easily create, manage, and monitor tasks, specifying requirements and deadlines.
+## Dependencies
+- React.js
+- React Router DOM
+- Tailwind CSS
+- DaisyUI
+- Styled Components
+- React Query
+- Axios
+- Framer Motion
+- Firebase
+- Stripe.js & React Stripe.js
+- ImageBB API
+- SweetAlert2
+- React Icons
+- Swiper.js
+- React Responsive Carousel
 
-- Dynamic Task Pricing: Buyers set worker payouts, with built-in calculations to ensure fair payment distribution.
+## How to Run the Project Locally
+### Prerequisites:
+1. Install [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/).
 
-- User Roles: Dedicated dashboards for both Workers and Buyers, ensuring role-based functionality and UX.
+### Steps:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/piece-work.git
+   cd piece-work
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Set up environment variables:**
+   - Create a `.env` file in the root directory and add:
+     ```
+     VITE_apiKey=AIzaSyCdT2Uq4Olkefukj7LD-sdYYqnaIVHAF1A
+     VITE_authDomain=piece-work-e8024.firebaseapp.com
+     VITE_projectId=piece-work-e8024
+     VITE_storageBucket=piece-work-e8024.firebasestorage.app
+     VITE_messagingSenderId=617392905502
+     VITE_appId=1:617392905502:web:e8f080c70aab2c7b80fd0f
+     VITE_IMAGE_KEY=b5076748c9d50f8f1ab6dcfda7e13daa
+     VITE_PAYMENT_GATEWAY_PK=pk_test_51QjLa7QpCsfqk5cbMknXU3mIMXE4j3vBWcD9ZB1voBcMx11SuDQQbi5EmQ4s4FL8PmUjA1LQY6keFMfakrPdU0Lz007fi5VPk1
+     ```
+4. **Start the backend server:**
+   ```bash
+   nodemon index.js
+   ```
+5. **Start the frontend:**
+   ```bash
+   npm run dev
+   ```
+6. Open `http://localhost:5173/` in your browser.
 
-- Real-Time Submissions: Workers can submit proofs for tasks, which are reviewed and approved by Buyers.
-- Built-In Wallet System: Coin-based economy for payments; Buyers can purchase coins, and Workers can withdraw earnings.
+## Live Project
+[Live Demo](#) (https://piece-work-e8024.web.app/)
 
-- Top Workers Showcase: Highlights high-performing workers on the homepage with their earnings and photos.
-
-- Pagination for Submissions: Efficient and dynamic pagination ensures a smooth browsing experience for Workers with large datasets.
-
-- Responsive Design: Fully optimized for mobile, tablet, and desktop devices.
-
-- Interactive FAQ Section: Provides users with instant answers to common questions in an engaging and intuitive layout.
-- Testimonials Section: Animated carousel showcasing feedback from users, building trust and credibility.
-
-
-
-
-
-## Tech Stack
-
-- Frontend: React.js, Tailwind CSS, DaisyUI, Swiper.js
-
-- Backend: Node.js, Express.js
-- Database: MongoDB
-- Authentication: AuthContext for seamless login and role-based access.
-
-
-## 📌 Future Enhancements:
-- In-app chat for Buyers and Workers.
-- Advanced task filtering and search options.
-- Dark mode for better user experience.
-- Integration with payment gateways for direct withdrawals.
-
+## Additional Resources
+- [MongoDB Docs](https://www.mongodb.com/docs/)
+- [React.js Docs](https://reactjs.org/docs/)
+- [Express.js Docs](https://expressjs.com/)
+- [Firebase Docs](https://firebase.google.com/docs)
+- [Stripe Docs](https://stripe.com/docs)
 
