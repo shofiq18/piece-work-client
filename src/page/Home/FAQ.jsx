@@ -87,8 +87,8 @@ const FAQ = () => {
       </section>
 
       <section className="bg-gray-100 py-16 text-center">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">Join PieceWork Now</h2>
+        <div className="max-w-7xl mx-auto px-3">
+          <h2 className=" text-2xl md:text-4xl font-bold text-gray-800 mb-6">Join PieceWork Now</h2>
           <p className="text-lg text-gray-600 mb-6">Start completing tasks and earning today! It's free to join, and it only takes a few minutes.</p>
           <a href="/register" className="bg-green-600 text-white px-6 py-3 text-lg rounded-lg hover:bg-green-700 transition-colors">Get Started</a>
         </div>

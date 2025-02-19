@@ -19,10 +19,7 @@ const UserProfile = () => {
           <div className="mt-4">
             <p className="text-lg font-semibold text-gray-800">Coins: {user.coins}</p>
           </div>
-          <div className="card-actions justify-center mt-6">
-            <button className="btn btn-primary">Edit Profile</button>
-            <button className="btn btn-outline btn-secondary">Logout</button>
-          </div>
+          
         </div>
       </div>
     </div>

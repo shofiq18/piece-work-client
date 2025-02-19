@@ -39,6 +39,8 @@ import PaymentHistory from "../Dashboard/Buyer/PaymentHistory";
 import ManageUsers from "../Dashboard/Admin/ManageUsers";
 import ManageTasks from "../Dashboard/Admin/ManageTasks";
 import AdminHome from "../Dashboard/Admin/AdminHome";
+import About from "../page/About";
+import Contact from "../page/Contact";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
         path: "/user-profile",
         element: <UserProfile></UserProfile>,
       },
+      {
+        path: "/about", 
+        element: <About></About>  
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      }, 
     ],
   },
   {
