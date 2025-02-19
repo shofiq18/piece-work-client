@@ -67,6 +67,7 @@ const TaskList = () => {
   const [tasks, setTasks] = useState([]); // Original tasks fetched from backend
   const [sortedTasks, setSortedTasks] = useState([]); // Sorted tasks for display
   const [sortOrder, setSortOrder] = useState("ascending"); // Default sort order
+  const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
 
   // Fetch tasks from the backend
@@ -86,6 +87,8 @@ const TaskList = () => {
         setSortedTasks(initialSortedTasks); // Default to ascending
       } catch (error) {
         console.error("Error fetching tasks:", error);
+      } finally {
+        setLoading(false); // End loading when fetch is complete
       }
     };
 
@@ -112,6 +115,10 @@ const TaskList = () => {
   const handleViewDetails = (taskId) => {
     navigate(`/dashboard/tasks/${taskId}`);
   };
+
+  if (loading) {
+    return <div>Loading tasks...</div>; // Show loading message until tasks are fetched
+  }
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -172,4 +179,3 @@ const TaskList = () => {
 };
 
 export default TaskList;
-``
