@@ -23,13 +23,13 @@ const Navbar = () => {
     const loggedInNavOptions = (
         <>
             <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/available-coin">Available Coin ({user?.coins || 0})</Link></li>
+            <li><Link to="/">Available Coin ({user?.coins || 0})</Link></li>
             <li><Link to="/user-profile">User Profile</Link></li>
         </>
     );
 
     return (
-        <div className="sticky top-0 z-50 py-2 bg-base-100 bg-opacity-90">
+        <div className="sticky top-0 z-50  bg-base-100 bg-opacity-90">
             <div className="navbar max-w-7xl mx-auto">
                 {/* Navbar Start */}
                 <div className="navbar-start">

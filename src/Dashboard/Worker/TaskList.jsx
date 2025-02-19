@@ -127,7 +127,7 @@ const TaskList = () => {
       {/* Sorting Controls */}
       <div className="flex justify-between items-center mt-4">
         <p className="text-lg font-semibold">Sort By:</p>
-        <div>
+        <div className="flex space-x-2">
           <button
             onClick={() => handleSort("ascending")}
             className={`px-4 py-2 rounded-l bg-blue-500 text-white hover:bg-blue-600 ${

@@ -103,8 +103,8 @@ const Footer = ({ user }) => {
                             <Link to="/dashboard" className="hover:opacity-80">Dashboard</Link>
                         </li>
                         <li>
-                            <Link to="/available-coin" className="hover:opacity-80">
-                                Available Coin ({user?.coins || 0})
+                            <Link to="/" className="hover:opacity-80">
+                                Available Coin 
                             </Link>
                         </li>
                         <li>
