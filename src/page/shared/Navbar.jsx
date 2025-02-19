@@ -29,7 +29,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="sticky top-0 z-50  bg-base-100 bg-opacity-90">
+        <div className="sticky top-0 z-50  bg-gray-100 bg-opacity-90">
             <div className="navbar max-w-7xl mx-auto">
                 {/* Navbar Start */}
                 <div className="navbar-start">
