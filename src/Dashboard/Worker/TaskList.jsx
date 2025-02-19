@@ -64,9 +64,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
-  const [sortedTasks, setSortedTasks] = useState([]); // For displaying sorted tasks
-  const [sortOrder, setSortOrder] = useState(""); // Ascending or Descending
+  const [tasks, setTasks] = useState([]); // Original tasks fetched from backend
+  const [sortedTasks, setSortedTasks] = useState([]); // Sorted tasks for display
+  const [sortOrder, setSortOrder] = useState("ascending"); // Default sort order
   const navigate = useNavigate();
 
   // Fetch tasks from the backend
@@ -76,8 +76,14 @@ const TaskList = () => {
         const response = await axios.get(
           "https://piece-work-server.vercel.app/tasks/available"
         );
-        setTasks(response.data);
-        setSortedTasks(response.data); // Initialize sorted tasks
+        const fetchedTasks = response.data;
+        setTasks(fetchedTasks);
+
+        // Sort tasks on the first render
+        const initialSortedTasks = [...fetchedTasks].sort(
+          (a, b) => a.payable_amount - b.payable_amount
+        );
+        setSortedTasks(initialSortedTasks); // Default to ascending
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
@@ -86,21 +92,20 @@ const TaskList = () => {
     fetchTasks();
   }, []);
 
-  // Handle sorting
+  // Handle sorting when a button is clicked
   const handleSort = (order) => {
-    setSortOrder(order); // Update sort order
+    setSortOrder(order); // Update the selected sort order
 
     const sorted = [...tasks].sort((a, b) => {
       if (order === "ascending") {
-        return a.payable_amount - b.payable_amount; // Ascending order
+        return a.payable_amount - b.payable_amount; // Ascending
       } else if (order === "descending") {
-        return b.payable_amount - a.payable_amount; // Descending order
-      } else {
-        return 0; // No sorting
+        return b.payable_amount - a.payable_amount; // Descending
       }
+      return 0; // No sorting
     });
 
-    setSortedTasks(sorted); // Update the sorted tasks
+    setSortedTasks(sorted); // Update the sorted tasks state
   };
 
   // Navigate to task details page
@@ -167,3 +172,4 @@ const TaskList = () => {
 };
 
 export default TaskList;
+``
