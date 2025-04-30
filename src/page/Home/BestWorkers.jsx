@@ -31,7 +31,7 @@ const BestWorkers = () => {
             key={worker._id}
             className={`relative group bg-gradient-to-r ${
               index % 2 === 0
-                ? "from-indigo-600 via-purple-600 to-pink-500"
+                ? "from-indigo-900 via-purple-600 to-pink-200"
                 : "from-teal-500 via-blue-500 to-indigo-600"
             } p-6 rounded-xl shadow-xl overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:rotate-2`}
           >

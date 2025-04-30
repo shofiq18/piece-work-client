@@ -110,7 +110,7 @@ const DashboardLayout = () => {
 
         {/* Main Content */}
         <main
-          className={`flex-grow p-6 bg-gray-100 transition-all duration-300 ${
+          className={`flex-grow p-6  transition-all duration-300 ${
             isSidebarOpen ? "opacity-50 pointer-events-none lg:opacity-100" : ""
           }`}
         >

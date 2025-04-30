@@ -56,8 +56,8 @@ const Contact = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="mt-2 p-3 w-full border rounded-md bg-white shadow-sm"
-                                placeholder="Enter your name"
+                                className="mt-2 p-3 w-full border rounded-md shadow-lg"
+                               
                             />
                         </div>
 
@@ -73,8 +73,8 @@ const Contact = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="mt-2 p-3 w-full border rounded-md bg-white shadow-sm"
-                                placeholder="Enter your email"
+                                className="mt-2 p-3 w-full border rounded-md  shadow-lg"
+                                
                             />
                         </div>
 
@@ -90,8 +90,8 @@ const Contact = () => {
                                 onChange={handleChange}
                                 required
                                 rows="6"
-                                className="mt-2 p-3 w-full border rounded-md bg-white shadow-sm"
-                                placeholder="Write your message"
+                                className="mt-2 p-3 w-full border  rounded-md shadow-lg"
+                                
                             ></textarea>
                         </div>
 

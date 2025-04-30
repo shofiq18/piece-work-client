@@ -43,15 +43,15 @@ const WithdrawRequests = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Withdraw Requests</h1>
 
       {withdrawals.length === 0 ? (
-        <p className="text-lg text-gray-500">No pending withdrawals.</p>
+        <p className="text-lg ">No pending withdrawals.</p>
       ) : (
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+        <table className="min-w-full  border border-gray-200 rounded-lg shadow-md">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 text-gray-700">
               <th className="py-3 px-4 text-left">Worker Name</th>
               <th className="py-3 px-4 text-left">Email</th>
               <th className="py-3 px-4 text-left">Coins</th>
