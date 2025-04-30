@@ -185,14 +185,14 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className="w-full max-w-md p-6 border rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center  mb-6">
           Create Your Account
         </h2>
         <form onSubmit={handleRegister}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="name" className="block  font-medium mb-2">
               Full Name
             </label>
             <input
@@ -204,7 +204,7 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="photo" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="photo" className="block  font-medium mb-2">
               Upload Profile Picture
             </label>
             <input
@@ -219,7 +219,7 @@ const Register = () => {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="email" className="block font-medium mb-2">
               Email Address
             </label>
             <input
@@ -231,7 +231,7 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="password" className="block  font-medium mb-2">
               Password
             </label>
             <input
@@ -246,7 +246,7 @@ const Register = () => {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="role" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="role" className="block  font-medium mb-2">
               Role
             </label>
             <select
@@ -270,7 +270,7 @@ const Register = () => {
         </form>
         <div className="mt-6 flex items-center justify-between">
           <span className="block border-t w-full"></span>
-          <span className="px-4 text-gray-500">OR</span>
+          <span className="px-4 ">OR</span>
           <span className="block border-t w-full"></span>
         </div>
         <button
@@ -280,7 +280,7 @@ const Register = () => {
           <FcGoogle className="w-5 h-5" />
           <span>Sign in with Google</span>
         </button>
-        <p className="text-center text-gray-500 text-sm mt-6">
+        <p className="text-center  text-sm mt-6">
           Already have an account?{" "}
           <Link to="/login" className="text-blue-500 hover:underline">
             Login

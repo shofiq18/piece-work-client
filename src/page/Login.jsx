@@ -78,16 +78,16 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className="w-full max-w-md p-6 border rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center mb-6">
           Login to Your Account
         </h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-gray-700 font-medium mb-2"
+              className="block  font-medium mb-2"
             >
               Email Address
             </label>
@@ -102,7 +102,7 @@ const Login = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-gray-700 font-medium mb-2"
+              className="block  font-medium mb-2"
             >
               Password
             </label>
@@ -128,7 +128,7 @@ const Login = () => {
         </form>
         <div className="mt-6 flex items-center justify-between">
           <span className="block border-t w-full"></span>
-          <span className="px-4 text-gray-500">OR</span>
+          <span className="px-4 ">OR</span>
           <span className="block border-t w-full"></span>
         </div>
         <button
@@ -160,9 +160,9 @@ const Login = () => {
           </svg>
           <span>Sign in with Google</span>
         </button>
-        <p className="mt-4 text-sm text-gray-600 text-center">
+        <p className="mt-4 text-sm  text-center">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-500 hover:underline">
+          <a href="/register" className="text-blue-600 hover:underline">
             Register now
           </a>
         </p>
