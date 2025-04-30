@@ -30,14 +30,14 @@ const FAQ = () => {
 
   return (
     <div>
-      <section className="bg-gray-100 px-6 py-12">
+      <section className=" px-6 py-12">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq) => (
               <div
                 key={faq.id}
-                className="bg-white p-6 rounded-lg shadow-md cursor-pointer"
+                className=" border p-6 rounded-lg shadow-md cursor-pointer"
                 onClick={() => toggleFAQ(faq.id)}
               >
                 <div className="flex justify-between items-center">
@@ -46,7 +46,7 @@ const FAQ = () => {
                     {activeFAQ === faq.id ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-gray-600"
+                        className="h-5 w-5  "
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -78,7 +78,7 @@ const FAQ = () => {
                   </span>
                 </div>
                 {activeFAQ === faq.id && (
-                  <p className="text-gray-600 mt-4">{faq.answer}</p>
+                  <p className=" mt-4">{faq.answer}</p>
                 )}
               </div>
             ))}
@@ -86,10 +86,10 @@ const FAQ = () => {
         </div>
       </section>
 
-      <section className="bg-gray-100 py-16 text-center">
+      <section className=" py-16 text-center">
         <div className="max-w-7xl mx-auto px-3">
-          <h2 className=" text-2xl md:text-4xl font-bold text-gray-800 mb-6">Join PieceWork Now</h2>
-          <p className="text-lg text-gray-600 mb-6">Start completing tasks and earning today! It's free to join, and it only takes a few minutes.</p>
+          <h2 className=" text-2xl md:text-4xl font-bold  mb-6">Join PieceWork Now</h2>
+          <p className="text-lg  mb-6">Start completing tasks and earning today! It's free to join, and it only takes a few minutes.</p>
           <a href="/register" className="bg-green-600 text-white px-6 py-3 text-lg rounded-lg hover:bg-green-700 transition-colors">Get Started</a>
         </div>
       </section>

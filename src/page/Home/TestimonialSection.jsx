@@ -45,7 +45,7 @@ const testimonials = [
 
 const TestimonialSection = () => {
   return (
-    <section className="bg-gray-100 py-12">
+    <section className=" py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">
           What Our Users Say
@@ -75,14 +75,14 @@ const TestimonialSection = () => {
         >
           {testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <div className="bg-white p-6 rounded-bl-3xl  rounded-tr-3xl shadow-md text-center animate-slide">
+              <div className="border  p-6 rounded-bl-3xl  rounded-tr-3xl shadow-md text-center animate-slide">
                 <img
                   src={testimonial.photo}
                   alt={testimonial.name}
                   className="w-16 h-16 mx-auto rounded-full mb-4"
                 />
                 <h3 className="text-lg font-semibold">{testimonial.name}</h3>
-                <p className="text-gray-600 mt-2">{testimonial.feedback}</p>
+                <p className=" mt-2">{testimonial.feedback}</p>
               </div>
             </SwiperSlide>
           ))}

@@ -30,7 +30,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="bg-gray-100">
+        <div className="">
             {/* Hero Section */}
             <section className="bg-blue-600 text-white py-20 text-center">
                 <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Contact Us</h1>
@@ -46,7 +46,7 @@ const Contact = () => {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Name Input */}
                         <div>
-                            <label htmlFor="name" className="block text-lg font-medium text-gray-700">
+                            <label htmlFor="name" className="block text-lg font-medium ">
                                 Name
                             </label>
                             <input
@@ -63,7 +63,7 @@ const Contact = () => {
 
                         {/* Email Input */}
                         <div>
-                            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+                            <label htmlFor="email" className="block text-lg font-medium ">
                                 Email
                             </label>
                             <input
@@ -80,7 +80,7 @@ const Contact = () => {
 
                         {/* Message Textarea */}
                         <div>
-                            <label htmlFor="message" className="block text-lg font-medium text-gray-700">
+                            <label htmlFor="message" className="block text-lg font-medium ">
                                 Message
                             </label>
                             <textarea
