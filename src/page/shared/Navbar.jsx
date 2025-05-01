@@ -1,230 +1,324 @@
 
+
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Variants for staggered menu items
+const menuVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+};
+
+// Dropdown animation
+const dropdownVariants = {
+  hidden: { opacity: 0, y: -20, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.2 } },
+};
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const { user, logOut } = useContext(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    useEffect(() => {
-        localStorage.setItem("theme", theme);
-        document.querySelector("html").setAttribute("data-theme", theme);
-    }, [theme]);
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.querySelector("html").setAttribute("data-theme", theme);
+  }, [theme]);
 
-    const handleToggle = (e) => {
-        setTheme(e.target.checked ? "dark" : "light");
-    };
+  const handleToggle = (e) => {
+    setTheme(e.target.checked ? "dark" : "light");
+  };
 
-    const handleLogOut = () => {
-        logOut()
-            .then(() => {
-                toast.success("Successfully logged out!", { theme: theme });
-            })
-            .catch(() => {
-                toast.error("Error logging out. Please try again!", { theme: theme });
-            });
-    };
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Successfully logged out!", { theme: theme });
+      })
+      .catch(() => {
+        toast.error("Error logging out. Please try again!", { theme: theme });
+      });
+  };
 
-    const loggedInNavOptions = (
-        <>
-            <li>
-                <Link to="/dashboard" className="hover:text-green-400 transition-colors duration-200 relative group text-base">
-                    Dashboard
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-            </li>
-            <li>
-                <Link to="/" className="hover:text-green-400 transition-colors duration-200 relative group text-base">
-                    Available Coin ({user?.coins || 0})
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-            </li>
-            <li>
-                <Link to="/user-profile" className="hover:text-green-400 transition-colors duration-200 relative group text-base">
-                    User Profile
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-            </li>
-        </>
-    );
+  const loggedInNavOptions = (
+    <motion.ul variants={menuVariants} initial="hidden" animate="visible">
+      <motion.li variants={menuItemVariants}>
+        <Link
+          to="/dashboard"
+          className="hover:text-green-400 transition-colors duration-200 relative group text-base"
+        >
+          Dashboard
+          <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+        </Link>
+      </motion.li>
+      <motion.li variants={menuItemVariants}>
+        <Link
+          to="/"
+          className="hover:text-green-400 transition-colors duration-200 relative group text-base"
+        >
+          Available Coin ({user?.coins || 0})
+          <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+        </Link>
+      </motion.li>
+      <motion.li variants={menuItemVariants}>
+        <Link
+          to="/user-profile"
+          className="hover:text-green-400 transition-colors duration-200 relative group text-base"
+        >
+          User Profile
+          <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+        </Link>
+      </motion.li>
+    </motion.ul>
+  );
 
-    return (
-        <div className="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white shadow-xl">
-            <div className="navbar max-w-7xl mx-auto px-4 sm:px-2 lg:px-0">
-                {/* Navbar Start */}
-                <div className="navbar-start flex items-center">
-                    <div className="dropdown lg:hidden">
-                        <div tabIndex={0} role="button" className="btn btn-ghost p-2">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 0 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16"
-                                />
-                            </svg>
-                        </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu dropdown-content bg-gradient-to-b from-gray-800 to-black text-white rounded-box mt-2 w-64 p-4 shadow-2xl transform transition-all duration-300"
-                        >
-                            {user?.email ? loggedInNavOptions : null}
-                            <li>
-                                <Link to="/about" className="hover:text-green-400 transition-colors duration-200 text-base">
-                                    About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/contact" className="hover:text-green-400 transition-colors duration-200 text-base">
-                                    Contact Us
-                                </Link>
-                            </li>
-                            <li className="mt-4">
-                                <label className="flex items-center space-x-2 cursor-pointer">
-                                    <span className="text-base">Toggle Theme</span>
-                                    <input
-                                        type="checkbox"
-                                        onChange={handleToggle}
-                                        checked={theme === "dark"}
-                                        className="hidden"
-                                    />
-                                    <svg
-                                        className={`${theme === "dark" ? "block" : "hidden"} h-6 w-6 fill-current transform hover:rotate-45 transition-transform duration-200`}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
-                                        />
-                                    </svg>
-                                    <svg
-                                        className={`${theme === "light" ? "block" : "hidden"} h-6 w-6 fill-current transform hover:rotate-45 transition-transform duration-200`}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0 communicative,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
-                                        />
-                                    </svg>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <Link to="/" className="flex items-center space-x-2 transform hover:scale-105 transition-transform duration-200">
-                        <span className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-                            PieceWork
-                        </span>
-                    </Link>
-                </div>
-
-                {/* Navbar Center */}
-                <div className="navbar-center hidden lg:flex items-center ">
-                    <ul className="menu menu-horizontal space-x-3">
-                        {user?.email ? loggedInNavOptions : null}
-                        <li>
-                            <Link to="/about" className="hover:text-green-400 transition-colors duration-200 relative group text-base">
-                                About Us
-                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/contact" className="hover:text-green-400 transition-colors duration-200 relative group text-base">
-                                Contact Us
-                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
-                            </Link>
-                        </li>
-                    </ul>
-                    <a
-                        href="https://github.com/shofiq18"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-outline btn-success rounded-full px-3 py-1 text-sm hover:bg-green-500 hover:text-white transition-all duration-200"
-                    >
-                        Join as Developer
-                    </a>
-                </div>
-
-                {/* Navbar End */}
-                <div className="navbar-end flex items-center space-x-2 sm:space-x-3">
-                    {user?.email ? (
-                        <>
-                            <div className="relative group">
-                                {user.photo ? (
-                                    <img
-                                        src={user.photo}
-                                        alt="User"
-                                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-green-400 object-cover cursor-pointer transform hover:scale-110 transition-transform duration-200"
-                                    />
-                                ) : (
-                                    <FaUserCircle className="text-3xl sm:text-4xl text-green-400 transform hover:scale-110 transition-transform duration-200" />
-                                )}
-                                <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-2.5rem] hidden group-hover:block bg-gray-800 text-green-400 text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
-                                    {user.name}
-                                </span>
-                            </div>
-                            <button
-                                onClick={handleLogOut}
-                                className="bg-red-500 rounded-md btn-error text-white px-2 py-2 sm:px-4 sm:py-2 text-sm sm:text-base r hover:bg-red-600 transform hover:scale-105 transition-all duration-200"
-                            >
-                                Log Out
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/login">
-                                <button className="bg-blue-500 rounded-md  btn-primary text-white px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base  hover:bg-blue-600 transform hover:scale-105 transition-all duration-200">
-                                    Login
-                                </button>
-                            </Link>
-                            <Link to="/register" className="hidden sm:inline-block">
-                                <button className="bg-green-500 rounded-md btn-success text-white px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base  hover:bg-green-600 transform hover:scale-105 transition-all duration-200">
-                                    Register
-                                </button>
-                            </Link>
-                        </>
-                    )}
-                    <label className="swap swap-rotate ml-2 hidden lg:flex">
-                        <input
-                            type="checkbox"
-                            onChange={handleToggle}
-                            checked={theme === "dark"}
-                            className="hidden"
-                        />
-                        <svg
-                            className="swap-on h-8 w-8 fill-current transform hover:rotate-45 transition-transform duration-200"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
-                            />
-                        </svg>
-                        <svg
-                            className="swap-off h-8 w-8 fill-current transform hover:rotate-45 transition-transform duration-200"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
-                            />
-                        </svg>
-                    </label>
-                </div>
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white shadow-xl"
+    >
+      <div className="navbar max-w-7xl mx-auto px-4 sm:px-2 lg:px-0">
+        {/* Navbar Start */}
+        <div className="navbar-start flex items-center">
+          <div className="dropdown lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost p-2"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
             </div>
-            <ToastContainer position="top-right" autoClose={3000} theme={theme} />
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.ul
+                  variants={dropdownVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  tabIndex={0}
+                  className="menu dropdown-content bg-gradient-to-b from-gray-800 to-black text-white rounded-box mt-2 w-64 p-4 shadow-2xl"
+                >
+                  {user?.email ? loggedInNavOptions : null}
+                  <motion.li variants={menuItemVariants}>
+                    <Link
+                      to="/about"
+                      className="hover:text-green-400 transition-colors duration-200 text-base"
+                    >
+                      About Us
+                    </Link>
+                  </motion.li>
+                  <motion.li variants={menuItemVariants}>
+                    <Link
+                      to="/contact"
+                      className="hover:text-green-400 transition-colors duration-200 text-base"
+                    >
+                      Contact Us
+                    </Link>
+                  </motion.li>
+                  <motion.li variants={menuItemVariants} className="mt-4">
+                    <label className="flex items-center space-x-2 cursor-pointer">
+                      <span className="text-base">Toggle Theme</span>
+                      <input
+                        type="checkbox"
+                        onChange={handleToggle}
+                        checked={theme === "dark"}
+                        className="hidden"
+                      />
+                      <motion.svg
+                        className={`${theme === "dark" ? "block" : "hidden"} h-6 w-6 fill-current`}
+                        animate={{ rotate: theme === "dark" ? 45 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                      </motion.svg>
+                      <motion.svg
+                        className={`${theme === "light" ? "block" : "hidden"} h-6 w-6 fill-current`}
+                        animate={{ rotate: theme === "light" ? 45 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                      </motion.svg>
+                    </label>
+                  </motion.li>
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+          <Link to="/" className="flex items-center space-x-2">
+            <motion.span
+              className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              PieceWork
+            </motion.span>
+          </Link>
         </div>
-    );
+
+        {/* Navbar Center */}
+        <div className="navbar-center hidden lg:flex items-center">
+          <motion.ul
+            className="menu menu-horizontal space-x-3"
+            variants={menuVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {user?.email ? loggedInNavOptions : null}
+            <motion.li variants={menuItemVariants}>
+              <Link
+                to="/about"
+                className="hover:text-green-400 transition-colors duration-200 relative group text-base"
+              >
+                About Us
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </motion.li>
+            <motion.li variants={menuItemVariants}>
+              <Link
+                to="/contact"
+                className="hover:text-green-400 transition-colors duration-200 relative group text-base"
+              >
+                Contact Us
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </motion.li>
+          </motion.ul>
+          <motion.a
+            href="https://github.com/shofiq18"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline btn-success rounded-full px-3 py-1 text-sm hover:bg-green-500 hover:text-white transition-all duration-200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            Join as Developer
+          </motion.a>
+        </div>
+
+        {/* Navbar End */}
+        <div className="navbar-end flex items-center space-x-2 sm:space-x-3">
+          {user?.email ? (
+            <>
+              <motion.div
+                className="relative group"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {user.photo ? (
+                  <img
+                    src={user.photo}
+                    alt="User"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-green-400 object-cover cursor-pointer"
+                  />
+                ) : (
+                  <FaUserCircle className="text-3xl sm:text-4xl text-green-400" />
+                )}
+                <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-2.5rem] hidden group-hover:block bg-gray-800 text-green-400 text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
+                  {user.name}
+                </span>
+              </motion.div>
+              <motion.button
+                onClick={handleLogOut}
+                className="bg-red-500 rounded-md btn-error text-white px-2 py-2 sm:px-4 sm:py-2 text-sm sm:text-base hover:bg-red-600"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Log Out
+              </motion.button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <motion.button
+                  className="bg-blue-500 rounded-md btn-primary text-white px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base hover:bg-blue-600"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  Login
+                </motion.button>
+              </Link>
+              <Link to="/register" className="hidden sm:inline-block">
+                <motion.button
+                  className="bg-green-500 rounded-md btn-success text-white px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base hover:bg-green-600"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  Register
+                </motion.button>
+              </Link>
+            </>
+          )}
+          <label className="swap swap-rotate ml-2 hidden lg:flex">
+            <input
+              type="checkbox"
+              onChange={handleToggle}
+              checked={theme === "dark"}
+              className="hidden"
+            />
+            <motion.svg
+              className="swap-on h-8 w-8 fill-current"
+              animate={{ rotate: theme === "dark" ? 45 : 0 }}
+              transition={{ duration: 0.3 }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+            </motion.svg>
+            <motion.svg
+              className="swap-off h-8 w-8 fill-current"
+              animate={{ rotate: theme === "light" ? 45 : 0 }}
+              transition={{ duration: 0.3 }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+            </motion.svg>
+          </label>
+        </div>
+      </div>
+      <ToastContainer position="top-right" autoClose={3000} theme={theme} />
+    </motion.div>
+  );
 };
 
 export default Navbar;
