@@ -76,9 +76,9 @@ const MyTasks = () => {
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-3xl font-bold mb-6">My Tasks</h2>
       {tasks.length > 0 ? (
-        <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <table className="w-full shadow-md rounded-lg overflow-hidden">
           <thead>
-            <tr className="bg-gray-100 text-gray-700 text-left">
+            <tr className="text-left border-b bg-gray-100">
               <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">Details</th>
               <th className="px-4 py-2">Workers</th>
@@ -89,7 +89,7 @@ const MyTasks = () => {
           </thead>
           <tbody>
             {tasks.map((task) => (
-              <tr key={task._id} className="border-t hover:bg-gray-50">
+              <tr key={task._id} className="border hover:bg-gray-50">
                 <td className="px-4 py-2">{task.task_title}</td>
                 <td className="px-4 py-2">{task.task_detail}</td>
                 <td className="px-4 py-2">{task.required_workers}</td>
@@ -133,11 +133,11 @@ const MyTasks = () => {
       {/* Update Task Modal */}
       {selectedTask && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          className="fixed inset-0 flex items-center justify-center  bg-opacity-50 z-50"
           onClick={() => setSelectedTask(null)}
         >
           <div
-            className="bg-white p-6 rounded shadow-md w-full max-w-lg"
+            className=" p-6 rounded border bg-white shadow-md w-full max-w-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-xl font-bold mb-4">Update Task</h3>
@@ -175,7 +175,7 @@ const MyTasks = () => {
               </button>
               <button
                 onClick={() => setSelectedTask(null)}
-                className="ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                className="ml-2  text-white px-4 py-2 rounded hover:bg-gray-600"
               >
                 Cancel
               </button>

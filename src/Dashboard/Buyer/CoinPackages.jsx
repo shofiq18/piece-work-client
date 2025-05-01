@@ -10,12 +10,12 @@ const CoinPackages = ({ onSelectPackage }) => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
+      <h1 className="text-4xl font-extrabold text-center mb-8 ">
         Choose Your Coin Package
       </h1>
-      <p className="text-gray-600 text-center mb-12">
+      <p className=" text-center mb-12">
         Select a package and start earning faster. 
-        <span className="block text-gray-800 font-semibold">
+        <span className="block  font-semibold">
           The more coins, the better the value!
         </span>
       </p>
@@ -43,7 +43,7 @@ const CoinPackages = ({ onSelectPackage }) => {
             </p>
             <button
               onClick={() => onSelectPackage(pkg)}
-              className="bg-white text-blue-600 font-semibold px-6 py-2 rounded-lg shadow-lg hover:bg-blue-100 transition-colors duration-300"
+              className=" text-blue-600 font-semibold px-6 py-2 bg-gray-200 rounded-lg shadow-lg hover:bg-blue-100 transition-colors duration-300"
             >
               Buy Now
             </button>

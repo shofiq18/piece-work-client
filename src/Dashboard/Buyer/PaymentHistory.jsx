@@ -25,19 +25,19 @@ const PaymentHistory = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
+      <h1 className="text-4xl font-extrabold text-center mb-8 ">
         Payment History
       </h1>
 
       {payments.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table-auto w-full bg-white rounded-lg shadow-lg">
+          <table className="table-auto border  w-full rounded-lg shadow-lg">
             <thead>
-              <tr className="bg-gray-100 border-b">
-                <th className="px-6 py-3 text-left text-gray-600 font-medium">Transaction ID</th>
-                <th className="px-6 py-3 text-left text-gray-600 font-medium">Coins Purchased</th>
-                <th className="px-6 py-3 text-left text-gray-600 font-medium">Amount Paid ($)</th>
-                <th className="px-6 py-3 text-left text-gray-600 font-medium">Date</th>
+              <tr className="border bg-gray-100 text-gray-700">
+                <th className="px-6 py-3 text-left font-medium">Transaction ID</th>
+                <th className="px-6 py-3 text-left  font-medium">Coins Purchased</th>
+                <th className="px-6 py-3 text-left  font-medium">Amount Paid ($)</th>
+                <th className="px-6 py-3 text-left  font-medium">Date</th>
               </tr>
             </thead>
             <tbody>
@@ -46,10 +46,10 @@ const PaymentHistory = () => {
                   key={payment.transactionId}
                   className={`border-t ${index % 2 === 0 ? "bg-gray-50" : ""} hover:bg-gray-100`}
                 >
-                  <td className="px-6 py-4 text-gray-800">{payment.transactionId}</td>
-                  <td className="px-6 py-4 text-gray-800">{payment.coins}</td>
-                  <td className="px-6 py-4 text-gray-800">${payment.amount.toFixed(2)}</td>
-                  <td className="px-6 py-4 text-gray-800">
+                  <td className="px-6 py-4">{payment.transactionId}</td>
+                  <td className="px-6 py-4 ">{payment.coins}</td>
+                  <td className="px-6 py-4">${payment.amount.toFixed(2)}</td>
+                  <td className="px-6 py-4">
                     {new Date(payment.timestamp).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -63,8 +63,8 @@ const PaymentHistory = () => {
         </div>
       ) : (
         <div className="text-center mt-12">
-          <p className="text-lg font-medium text-gray-700">No payment history found.</p>
-          <p className="text-gray-500">Make a purchase to see your payment history here.</p>
+          <p className="text-lg font-medium ">No payment history found.</p>
+          <p className="">Make a purchase to see your payment history here.</p>
         </div>
       )}
     </div>

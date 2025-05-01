@@ -107,8 +107,8 @@ const CheckoutForm = ({ clientSecret, selectedPackage }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Enter Your Payment Details</h2>
+      <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow">
+        <h2 className="text-xl  font-semibold mb-4">Enter Your Payment Details</h2>
 
         <CardElement
           options={{
@@ -139,7 +139,7 @@ const CheckoutForm = ({ clientSecret, selectedPackage }) => {
       </form>
 
       {success && (
-        <div className="mt-6 bg-green-100 p-4 rounded-lg">
+        <div className="mt-6 b p-4 rounded-lg">
           <h3 className="text-green-700 font-bold">Payment Successful!</h3>
           <p>Transaction ID: {transactionId}</p>
         </div>

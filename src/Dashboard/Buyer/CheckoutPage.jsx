@@ -47,7 +47,7 @@ const CheckoutPage = () => {
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Checkout</h1>
-      <div className="bg-white p-6 rounded-lg shadow">
+      <div className=" p-6 border  rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Selected Package</h2>
         <p className="text-lg">
           <strong>{selectedPackage.coins} Coins</strong> for <strong>${selectedPackage.price}</strong>

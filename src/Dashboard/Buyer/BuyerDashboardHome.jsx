@@ -72,7 +72,7 @@ const BuyerDashboardHome = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+      <h1 className="text-4xl font-bold text-center mb-8">
         Buyer Dashboard
       </h1>
 
@@ -93,20 +93,20 @@ const BuyerDashboardHome = () => {
           </div>
         </div>
       ) : (
-        <div className="text-lg text-gray-700">Loading Buyer Stats...</div>
+        <div className="text-lg">Loading Buyer Stats...</div>
       )}
 
       {/* Submissions Table */}
-      <h2 className="text-3xl font-semibold text-gray-800 my-6">
+      <h2 className="text-3xl font-semibold  my-6">
         Tasks To Review
       </h2>
       {loadingSubmissions ? (
         <p className="text-center text-gray-600">Loading submissions...</p>
       ) : submissions.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table-auto w-full bg-white rounded-lg shadow">
+          <table className="table-auto border w-full rounded-lg shadow">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="">
                 <th className="px-4 py-2 text-left">Worker Name</th>
                 <th className="px-4 py-2 text-left">Task Title</th>
                 <th className="px-4 py-2 text-left">Payable Amount</th>
