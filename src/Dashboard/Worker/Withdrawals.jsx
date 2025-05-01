@@ -64,7 +64,7 @@ const Withdrawals = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-md">
+    <div className="max-w-xl mx-auto p-6 border  shadow-md rounded-md">
       <h1 className="text-2xl font-bold mb-4">Withdraw Coins</h1>
 
       <div className="mb-4">
@@ -84,7 +84,7 @@ const Withdrawals = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">
+            <label className="block font-medium mb-2">
               Coins to Withdraw
             </label>
             <input
@@ -94,25 +94,25 @@ const Withdrawals = () => {
               value={withdrawCoin}
               onChange={(e) => setWithdrawCoin(Number(e.target.value))}
               className="w-full p-2 border rounded-md"
-              placeholder="Enter coins to withdraw"
+              
               required
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">
+            <label className="block  font-medium mb-2">
               Withdrawal Amount ($)
             </label>
             <input
               type="text"
               value={`$${withdrawAmount}`}
               readOnly
-              className="w-full p-2 border rounded-md bg-gray-100"
+              className="w-full p-2 border rounded-md "
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">
+            <label className="block font-medium mb-2">
               Select Payment System
             </label>
             <select
@@ -132,7 +132,7 @@ const Withdrawals = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">
+            <label className="block font-medium mb-2">
               Account Number
             </label>
             <input
@@ -140,7 +140,7 @@ const Withdrawals = () => {
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
               className="w-full p-2 border rounded-md"
-              placeholder="Enter account number"
+              
               required
             />
           </div>

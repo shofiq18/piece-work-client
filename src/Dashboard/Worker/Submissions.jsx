@@ -71,7 +71,7 @@ const Submissions = () => {
                   <td className="px-2 sm:px-4 py-2 border">{submission.submission_details}</td>
                   <td className="px-2 sm:px-4 py-2 border">${submission.payable_amount}</td>
                   <td
-                    className={`px-2 sm:px-4 py-2 border ${
+                    className={`px-2 sm:px-4 py-2 text-black border ${
                       submission.status === "pending"
                         ? "bg-yellow-300"
                         : submission.status === "completed"
@@ -101,7 +101,7 @@ const Submissions = () => {
       <div className="flex flex-wrap justify-center items-center mt-4 gap-2">
         <button
           className={`px-3 py-1 sm:px-4 sm:py-2 border rounded-md ${
-            currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
+            currentPage === 1 ? " cursor-not-allowed" : "bg-blue-500 "
           }`}
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -124,7 +124,7 @@ const Submissions = () => {
         <button
           className={`px-3 py-1 sm:px-4 sm:py-2 border rounded-md ${
             currentPage === totalPages
-              ? "bg-gray-300 cursor-not-allowed"
+              ? " cursor-not-allowed"
               : "bg-blue-500 text-white"
           }`}
           onClick={() => handlePageChange(currentPage + 1)}

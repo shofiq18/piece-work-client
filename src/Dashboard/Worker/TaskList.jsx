@@ -150,8 +150,8 @@ const TaskList = () => {
       {/* Task Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {sortedTasks.map((task) => (
-          <div key={task._id} className="p-4 bg-white shadow-md rounded-lg">
-            <h2 className="text-xl font-bold mb-2">{task.task_title}</h2>
+          <div key={task._id} className="p-4  border shadow-md rounded-lg">
+            <h2 className="text-2xl font-bold mb-2">{task.task_title}</h2>
             <p className="mb-1">
               <strong>Buyer Name:</strong> {task.buyer_name || "N/A"}
             </p>

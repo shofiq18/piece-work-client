@@ -73,8 +73,8 @@ const TaskDetails = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-3xl font-bold mb-4">Task Details</h2>
-      <div className="p-6 bg-white shadow-md rounded-lg">
-        <h3 className="text-xl font-bold mb-2">{task.task_title}</h3>
+      <div className="p-6  border shadow-md rounded-lg">
+        <h3 className="text-2xl font-bold mb-2">{task.task_title}</h3>
         <p><strong>Buyer Name:</strong> {task.buyer_name}</p>
         <p><strong>Buyer Email:</strong> {task.buyer_email}</p>
         <p><strong>Completion Date:</strong> {new Date(task.completion_date).toLocaleDateString()}</p>
